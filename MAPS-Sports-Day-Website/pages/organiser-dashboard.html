@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f4f1e9">
+  <title>Organiser dashboard · MAPS Sports Day 2026</title><link rel="stylesheet" href="../style.css">
+</head>
+<body data-page="organiser-dashboard">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead"><nav class="nav container" aria-label="Main navigation">
+    <a class="brand" href="../index.html" aria-label="MAPS Sports Day home"><span class="brand-image"><img src="../assets/images/maps-logo.png" alt=""></span><span><strong>MAPS COLLEGE</strong><span>Sports Day · Mangalore</span></span></a>
+    <div class="nav-links" id="primary-navigation"><a class="nav-home" href="../index.html" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a><a href="events.html">Events</a><a href="gallery.html">Gallery</a><a href="help.html">Help</a><a href="organizer-login.html">Organizer login</a></div>
+    <a class="button small" href="register.html">Register <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
+  </nav></header>
+  <main id="main" class="content container">
+    <div class="dashboard-head">
+      <div><h2>Sports Day<br>dashboard.</h2><p>Registration records · 17 October 2026</p></div>
+      <div class="dashboard-actions"><span id="organiser-email-label" class="page-note">Checking organiser access…</span><button class="button outline small" type="button" id="organiser-logout">Sign out</button></div>
+    </div>
+    <p class="dashboard-status" id="dashboard-status" role="status" aria-live="polite">Loading registration records…</p>
+    <section class="dashboard-stats" aria-label="Registration totals">
+      <div><strong id="total-students">—</strong><span>Registered students</span></div>
+      <div><strong id="degree-students">—</strong><span>Degree students</span></div>
+      <div><strong id="puc-students">—</strong><span>PUC students</span></div>
+    </section>
+    <h3 class="track-tag">Choose a competition division</h3>
+    <section class="dashboard-groups" aria-label="Competition divisions">
+      <button class="dashboard-group" type="button" data-group="degree-boys" aria-pressed="true"><strong>Degree Boys</strong><span>— students</span></button>
+      <button class="dashboard-group" type="button" data-group="degree-girls" aria-pressed="false"><strong>Degree Girls</strong><span>— students</span></button>
+      <button class="dashboard-group" type="button" data-group="puc-boys" aria-pressed="false"><strong>PUC Boys</strong><span>— students</span></button>
+      <button class="dashboard-group" type="button" data-group="puc-girls" aria-pressed="false"><strong>PUC Girls</strong><span>— students</span></button>
+    </section>
+    <p class="page-note">Showing entries for <strong id="selected-group-label">Degree Boys</strong>.</p>
+
+    <div class="dashboard-sections">
+      <section class="dashboard-section"><h3>Track events</h3><div class="dashboard-event-list" id="track-event-list"></div></section>
+      <section class="dashboard-section"><h3>Field events</h3><div class="dashboard-event-list" id="field-event-list"></div></section>
+    </div>
+
+    <section class="dashboard-panel" aria-labelledby="participant-heading">
+      <div class="dashboard-panel-head"><h3 id="participant-heading">Participants</h3><div class="dashboard-tools"><input class="dashboard-search" id="participant-search" type="search" placeholder="Search this division" aria-label="Search participants"><button class="button small" type="button" id="download-event-csv" disabled>Download CSV</button></div></div>
+      <p class="dashboard-empty" id="participants-empty">Select an event above to view its participants.</p>
+      <div class="dashboard-table" id="participant-table-wrap" hidden>
+        <table><thead><tr><th>#</th><th>Name</th><th>Student ID</th><th>Course / year</th><th>Gender</th></tr></thead><tbody id="participant-table"></tbody></table>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="container"><div class="footer-top"><a class="brand" href="../index.html" aria-label="MAPS Sports Day home"><span class="brand-image"><img src="../assets/images/maps-logo.png" alt=""></span><span><strong>MAPS COLLEGE</strong><span>Sports Day · Mangalore</span></span></a><nav class="footer-links" aria-label="Footer links"><a href="events.html">Events &amp; rules</a><a href="help.html">Help &amp; venue</a><a href="https://mapsmangalore.com/" target="_blank" rel="noopener">College website ↗</a><a href="organizer-login.html">Organizer login</a></nav></div><div class="footer-bottom"><span>© 2026 MAPS Sports Day · Mangalore</span><span>17 October 2026 · Run. Jump. Compete.</span></div></div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../supabase-config.js"></script>
+  <script src="../script.js" defer></script>
+</body>
+</html>

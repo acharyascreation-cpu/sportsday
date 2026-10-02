@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">MAPS running track</title>
+  <desc id="desc">An isometric red athletics track with eight lanes around a navy infield.</desc>
+  <defs>
+    <linearGradient id="track" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#ff7650"/>
+      <stop offset=".52" stop-color="#eb5635"/>
+      <stop offset="1" stop-color="#c73d28"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#4a5568"/>
+      <stop offset="1" stop-color="#202c42"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+  <g transform="translate(68 64) rotate(13 385 238) skewX(-14)">
+    <path d="M203 131h391a141 141 0 0 1 0 282H203a141 141 0 0 1 0-282Z" fill="#030913" opacity=".35" filter="url(#soft-shadow)" transform="translate(9 35)"/>
+    <path d="M203 131h391a141 141 0 0 1 0 282H203a141 141 0 0 1 0-282Z" fill="url(#edge)" transform="translate(0 25)"/>
+    <path d="M203 131h391a141 141 0 0 1 0 282H203a141 141 0 0 1 0-282Z" fill="url(#track)" stroke="#ff8158" stroke-width="3"/>
+    <path d="M203 145h391a127 127 0 0 1 0 254H203a127 127 0 0 1 0-254Z" fill="none" stroke="#ffd38b" stroke-width="2" opacity=".85"/>
+    <path d="M203 159h391a113 113 0 0 1 0 226H203a113 113 0 0 1 0-226Z" fill="none" stroke="#ffd38b" stroke-width="2" opacity=".82"/>
+    <path d="M203 173h391a99 99 0 0 1 0 198H203a99 99 0 0 1 0-198Z" fill="none" stroke="#ffd38b" stroke-width="2" opacity=".78"/>
+    <path d="M203 187h391a85 85 0 0 1 0 170H203a85 85 0 0 1 0-170Z" fill="none" stroke="#ffd38b" stroke-width="2" opacity=".75"/>
+    <path d="M203 201h391a71 71 0 0 1 0 142H203a71 71 0 0 1 0-142Z" fill="none" stroke="#ffd38b" stroke-width="2" opacity=".72"/>
+    <path d="M203 215h391a57 57 0 0 1 0 114H203a57 57 0 0 1 0-114Z" fill="none" stroke="#ffd38b" stroke-width="2" opacity=".68"/>
+    <path d="M203 229h391a43 43 0 0 1 0 86H203a43 43 0 0 1 0-86Z" fill="none" stroke="#ffd38b" stroke-width="2" opacity=".64"/>
+    <path d="M203 243h391a29 29 0 0 1 0 58H203a29 29 0 0 1 0-58Z" fill="#344156" stroke="#f3eee1" stroke-width="2"/>
+    <text x="398" y="281" text-anchor="middle" fill="#9aa3b4" font-family="Arial, sans-serif" font-size="23" font-weight="700" letter-spacing="4" transform="rotate(2 398 281)">MAPS</text>
+    <path d="M203 131v282m391-282v282" fill="none" stroke="#fff3d9" stroke-width="2" opacity=".9"/>
+    <g fill="#f7d884" stroke="#fff2c4" stroke-width="2">
+      <circle cx="244" cy="140" r="5"/><circle cx="408" cy="140" r="5"/><circle cx="574" cy="153" r="5"/>
+      <circle cx="721" cy="260" r="5"/><circle cx="647" cy="397" r="5"/><circle cx="483" cy="403" r="5"/>
+      <circle cx="322" cy="403" r="5"/><circle cx="178" cy="298" r="5"/>
+    </g>
+  </g>
+</svg>

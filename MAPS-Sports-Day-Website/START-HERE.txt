@@ -1,0 +1,8 @@
+MAPS SPORTS DAY WEBSITE — START HERE
+
+1. Extract MAPS-Sports-Day-Website.zip.
+2. Open the extracted MAPS-Sports-Day-Website folder in Visual Studio Code.
+3. Open index.html and choose Go Live (Live Server).
+4. Read README.md for Supabase registration and organiser-login setup.
+
+The folder contains the complete site pages, styles, JavaScript, assets, and Supabase setup files.
