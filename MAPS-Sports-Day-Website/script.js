@@ -227,7 +227,7 @@
 
       try {
         const client = window.getSupabaseClient();
-        const courseValues = { "B.Com": "BCom", "B.ASLP": "BSALP" };
+        const courseValues = { BCom: "BCom", "BCom Evening": "BCom Evening", BSALP: "BSALP", BCA: "BCA", PUC: "PUC" };
         const { data, error } = await client.rpc("register_student", {
           p_name: document.getElementById("student-name").value.trim(),
           p_usn: document.getElementById("student-usn").value.trim(),
@@ -495,7 +495,7 @@
           name: record.student_name,
           usn: record.usn,
           course: record.course,
-          courseLabel: ({ BCom: "B.Com", BSALP: "B.ASLP" })[record.course] || record.course,
+          courseLabel: ({ BCom: "B.Com", "BCom Evening": "B.Com Evening", BSALP: "B.ASLP" })[record.course] || record.course,
           year: record.study_year,
           gender: record.gender,
           events: (record.student_events || []).map((item) => item.event_name)
