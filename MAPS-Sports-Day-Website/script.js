@@ -153,7 +153,7 @@
       }
       yearSelect.disabled = false;
       yearSelect.add(new Option("Select year", ""));
-      const years = course === "PUC" ? ["PUC 1st Year", "PUC 2nd Year"] : ["1st Year", "2nd Year", "3rd Year"];
+      const years = course === "PUC" ? ["PUC I Year", "PUC II Year"] : ["I Year", "II Year", "III Year"];
       years.forEach((year) => yearSelect.add(new Option(year, year)));
     };
 
