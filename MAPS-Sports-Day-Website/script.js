@@ -394,7 +394,7 @@
       const query = document.getElementById("participant-search").value.trim().toLowerCase();
       return getGroupStudents(selectedGroup)
         .filter((student) => student.events.includes(selectedEvent))
-        .filter((student) => !query || [student.name, student.usn, student.course, student.year, student.gender]
+        .filter((student) => !query || [student.name, student.usn, student.course, student.year, student.gender, student.phoneNumber]
           .some((value) => String(value).toLowerCase().includes(query)));
     };
     const renderParticipants = () => {
@@ -422,7 +422,7 @@
       participants.forEach((student, index) => {
         const row = document.createElement("tr");
         [String(index + 1), student.name, student.usn,
-          `${student.courseLabel} · ${student.year}`, student.gender]
+          `${student.courseLabel} · ${student.year}`, student.gender, student.phoneNumber]
           .forEach((value) => {
             const cell = document.createElement("td");
             cell.textContent = value;
@@ -457,10 +457,10 @@
     };
     const downloadCsv = () => {
       if (!selectedEvent) return;
-      const rows = [["No.", "Name", "Student ID", "Course", "Year", "Gender", "Event"]];
+      const rows = [["No.", "Name", "Student ID", "Course", "Year", "Gender", "Contact number", "Event"]];
       selectedParticipants().forEach((student, index) => rows.push([
         String(index + 1), student.name, student.usn,
-        student.courseLabel, student.year, student.gender, selectedEvent
+        student.courseLabel, student.year, student.gender, student.phoneNumber, selectedEvent
       ]));
       const csv = rows.map((row) => row.map(safeCell).join(",")).join("\r\n");
       const blobUrl = URL.createObjectURL(new Blob(["\ufeff", csv], { type: "text/csv;charset=utf-8" }));
@@ -489,7 +489,7 @@
         }
         document.getElementById("organiser-email-label").textContent = sessionData.session.user.email || "Signed in organiser";
         const { data, error } = await client.from("students")
-          .select("student_name, usn, course, study_year, gender, created_at, student_events(event_name)")
+          .select("student_name, usn, course, study_year, gender, phone_number, created_at, student_events(event_name)")
           .order("created_at", { ascending: false });
         if (error) throw error;
         students = (data || []).map((record) => ({
@@ -499,6 +499,7 @@
           courseLabel: ({ BCom: "B.Com", "BCom Evening": "B.Com Evening", BSALP: "B.ASLP" })[record.course] || record.course,
           year: record.study_year,
           gender: record.gender,
+          phoneNumber: record.phone_number || "",
           events: (record.student_events || []).map((item) => item.event_name)
         }));
         updateGroupCounts();
