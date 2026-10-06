@@ -7,6 +7,8 @@ create table if not exists public.students (
     course text not null check (course in ('BCA', 'BCom', 'BCom Evening', 'BSALP', 'PUC')),
     study_year text not null,
     gender text not null check (gender in ('Male', 'Female')),
+    contact_number text not null check (char_length(btrim(contact_number)) between 1 and 20),
+    phone_number text,
     created_at timestamptz not null default now(),
     constraint students_year_matches_course check (
         (course = 'PUC' and study_year in ('PUC 1st Year', 'PUC 2nd Year'))
@@ -14,6 +16,9 @@ create table if not exists public.students (
         (course <> 'PUC' and study_year in ('1st Year', '2nd Year', '3rd Year'))
     )
 );
+
+alter table public.students
+    add column if not exists phone_number text;
 
 create table if not exists public.student_events (
     student_id bigint not null references public.students(id) on delete cascade,
@@ -74,10 +79,11 @@ create policy "admins can read own membership"
 revoke execute on function public.is_sports_day_admin() from public, anon, authenticated;
 grant execute on function public.is_sports_day_admin() to authenticated;
 
--- Remove the starter function signature before installing the version that
--- accepts the current frontend registration form. Also remove the expanded
--- version from an earlier build if it has already been installed.
+-- The phone-aware RPC calls the original registration function and then saves
+-- the normalized number in the same transaction.
+drop function if exists public.register_student_with_phone(text, text, text, text, text, text, text[]);
 drop function if exists public.register_student(text, text, text, text, text, text[]);
+drop function if exists public.register_student(text, text, text, text, text, text, text[]);
 drop function if exists public.register_student(text, text, text, text, text, text, text, text, text[]);
 
 create or replace function public.register_student(
@@ -86,6 +92,7 @@ create or replace function public.register_student(
     p_course text,
     p_year text,
     p_gender text,
+    p_contact text,
     p_events text[]
 )
 returns jsonb
@@ -119,6 +126,10 @@ begin
 
     if p_gender is null or p_gender not in ('Male', 'Female') then
         raise exception using errcode = '22023', message = 'Select a valid gender.';
+    end if;
+
+    if p_contact is null or char_length(btrim(p_contact)) not between 1 and 20 then
+        raise exception using errcode = '22023', message = 'Enter a valid contact number.';
     end if;
 
     if p_events is null or cardinality(p_events) not between 1 and 3
@@ -159,8 +170,8 @@ begin
 
     v_usn := upper(btrim(p_usn));
 
-    insert into public.students (student_name, usn, course, study_year, gender)
-    values (btrim(p_name), v_usn, p_course, p_year, p_gender)
+    insert into public.students (student_name, usn, course, study_year, gender, contact_number)
+    values (btrim(p_name), v_usn, p_course, p_year, p_gender, btrim(p_contact))
     returning id into v_student_id;
 
     insert into public.student_events (student_id, event_name)
@@ -174,7 +185,64 @@ begin
 end;
 $$;
 
-revoke execute on function public.register_student(text, text, text, text, text, text[])
+revoke execute on function public.register_student(text, text, text, text, text, text, text[])
     from public, anon, authenticated;
-grant execute on function public.register_student(text, text, text, text, text, text[])
+grant execute on function public.register_student(text, text, text, text, text, text, text[])
+    to anon, authenticated;
+
+create or replace function public.register_student_with_phone(
+    p_name text,
+    p_usn text,
+    p_course text,
+    p_year text,
+    p_gender text,
+    p_phone_number text,
+    p_events text[]
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+    v_phone_number text;
+    v_result jsonb;
+    v_updated integer;
+begin
+    v_phone_number := regexp_replace(
+        coalesce(btrim(p_phone_number), ''),
+        '[[:space:]().-]',
+        '',
+        'g'
+    );
+
+    if v_phone_number !~ '^\+?[0-9]{7,15}$' then
+        raise exception using
+            errcode = '22023',
+            message = 'Enter a valid contact number.';
+    end if;
+
+    v_result := public.register_student(
+        p_name, p_usn, p_course, p_year, p_gender, v_phone_number, p_events
+    );
+
+    update public.students
+    set phone_number = v_phone_number
+    where id = (v_result ->> 'registrationId')::bigint;
+
+    get diagnostics v_updated = row_count;
+
+    if v_updated <> 1 then
+        raise exception using
+            errcode = '22023',
+            message = 'Could not save the contact number.';
+    end if;
+
+    return v_result;
+end;
+$$;
+
+revoke execute on function public.register_student_with_phone(text, text, text, text, text, text, text[])
+    from public, anon, authenticated;
+grant execute on function public.register_student_with_phone(text, text, text, text, text, text, text[])
     to anon, authenticated;

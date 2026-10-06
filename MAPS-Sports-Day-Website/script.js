@@ -228,12 +228,13 @@
       try {
         const client = window.getSupabaseClient();
         const courseValues = { BCom: "BCom", "BCom Evening": "BCom Evening", BSALP: "BSALP", BCA: "BCA", PUC: "PUC" };
-        const { data, error } = await client.rpc("register_student", {
+        const { data, error } = await client.rpc("register_student_with_phone", {
           p_name: document.getElementById("student-name").value.trim(),
           p_usn: document.getElementById("student-usn").value.trim(),
           p_course: courseValues[courseSelect.value] || courseSelect.value,
           p_year: yearSelect.value,
           p_gender: genderSelect.value,
+          p_phone_number: document.getElementById("student-phone-number").value.trim(),
           p_events: chosen.map((input) => input.value)
         });
 
