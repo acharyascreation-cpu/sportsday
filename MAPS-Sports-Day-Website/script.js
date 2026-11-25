@@ -302,8 +302,9 @@
     passwordToggle.addEventListener("click", () => {
       const revealPassword = passwordInput.type === "password";
       passwordInput.type = revealPassword ? "text" : "password";
-      passwordToggle.textContent = revealPassword ? "Hide" : "Show";
       passwordToggle.setAttribute("aria-pressed", String(revealPassword));
+      passwordToggle.setAttribute("aria-label", revealPassword ? "Hide password" : "Show password");
+      passwordToggle.setAttribute("title", revealPassword ? "Hide password" : "Show password");
     });
   }
 
