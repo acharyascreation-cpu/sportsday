@@ -246,3 +246,5 @@ revoke execute on function public.register_student_with_phone(text, text, text, 
     from public, anon, authenticated;
 grant execute on function public.register_student_with_phone(text, text, text, text, text, text, text[])
     to anon, authenticated;
+
+notify pgrst, 'reload schema';
