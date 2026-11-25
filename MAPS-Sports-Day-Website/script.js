@@ -75,7 +75,7 @@
   if (countdown) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const eventDay = new Date(2026, 9, 17);
+    const eventDay = new Date(2026, 11, 4);
     const days = Math.ceil((eventDay.getTime() - today.getTime()) / 86400000);
     countdown.textContent = days > 0 ? `${days} DAYS TO THE START` : days === 0 ? "EVENT DAY IS HERE" : "SPORTS DAY 2026";
   }
