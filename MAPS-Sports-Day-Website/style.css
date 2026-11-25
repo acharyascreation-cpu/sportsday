@@ -338,7 +338,7 @@ details p { padding: 16px 0 0; color: var(--muted); font-size: 13px; }
 .auth-back { margin-top: 15px; }
 .password-field { position: relative; }
 .password-field input { padding-right: 54px; }
-.password-toggle { position: absolute; top: 27px; right: 4px; display: grid; width: 40px; height: 40px; place-items: center; padding: 8px; border: 0; background: transparent; color: var(--muted); }
+.password-toggle { position: absolute; top: 4px; right: 4px; display: grid; width: 40px; height: 40px; place-items: center; padding: 8px; border: 0; background: transparent; color: var(--muted); }
 .password-toggle svg { width: 20px; height: 20px; }
 .password-toggle .eye-slash { display: none; }
 .password-toggle[aria-pressed="true"] .eye-open { display: none; }
