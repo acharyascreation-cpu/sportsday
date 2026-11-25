@@ -51,8 +51,6 @@ sports-day/
 
 Public registration sends the entered name, student ID, course/year, gender, and selected events to the Supabase project in `supabase-config.js`. The student tables are readable only to authenticated organisers under the included row-level security policies.
 
-If registration reports that `register_student_with_phone` is missing from the schema cache, run `supabase-register-rpc-fix.sql` in that same project's SQL Editor. It recreates the phone-aware RPC and asks PostgREST to reload its schema cache. If the script reports that the base function or phone column is missing, run the full `supabase-schema.sql` first.
-
 ## Replace or add images
 
 - Keep image files in `assets/images/` and use relative paths in the HTML. For example, a root page uses `assets/images/photo.jpg`, while a page in `pages/` uses `../assets/images/photo.jpg`.
