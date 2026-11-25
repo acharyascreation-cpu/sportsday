@@ -1,7 +1,7 @@
 // Paste the Project URL and publishable key from Supabase Dashboard > Project Settings > API.
 // The publishable key is meant for browser use. Never put a secret/service_role key here.
-window.SUPABASE_URL = "https://qzpibdzyxhmwcglaxcdq.supabase.co";
-window.SUPABASE_PUBLISHABLE_KEY = "sb_publishable_mOCDL-UOu1tBk-iCkMb8rQ_YhWHnjVr";
+window.SUPABASE_URL = "https://omshssqdkealxvpsucdx.supabase.co";
+window.SUPABASE_PUBLISHABLE_KEY = "sb_publishable_0Lb82dl2llJQ3YfbHKNqvw_F5tBbxrW";
 
 window.getSupabaseClient = function () {
     const url = window.SUPABASE_URL;
